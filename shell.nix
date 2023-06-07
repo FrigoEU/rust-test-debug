@@ -8,7 +8,11 @@ let
 in
 { pkgs ? pinnedNixpkgs }:
 let
-  cpp = pkgs.vscode-extensions.ms-vscode.cpptools;
+  cpptools= pkgs.vscode-extensions.ms-vscode.cpptools;
+  codelldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  codelldb-wrapped = pkgs.writeShellScriptBin "codelldbwrapped.sh" ''
+    ${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb --port=4471
+'';
 in
 pkgs.stdenv.mkDerivation rec {
   name = "rust-projects-test";
@@ -22,8 +26,10 @@ pkgs.stdenv.mkDerivation rec {
     pkgs.nodejs
 
     # Debugging rust!
-    cpp
+    cpptools
+    codelldb-wrapped
   ];
   # (setq dap-cpptools-debug-path (getenv "CPP_DAP_DEBUG_BIN_PATH"))
-  CPP_DAP_DEBUG_BIN_PATH = cpp + "/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
+  CPP_DAP_DEBUG_BIN_PATH = cpptools + "/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
+  LLDB_DAP_DEBUG_BIN_PATH = codelldb-wrapped + "/bin/codelldbwrapped.sh";
 }

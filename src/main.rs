@@ -1,3 +1,5 @@
+pub mod advent1;
+
 fn main() {
     let first = "First";
     let last = "Last";
