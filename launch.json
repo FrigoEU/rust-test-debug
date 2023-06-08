@@ -1,54 +1,16 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug main.rs",
-            "type": "gdb",
-            "request": "launch",
-            "program": "${workspaceFolder}/target/debug/main",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "gdbpath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
-            "miDebuggerPath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
-            "dap-compilation": "cargo build",
-            "dap-compilation-dir": "${workspaceFolder}"
-        },
-        {
-          "name": "Debug advent1.rs",
-          "type": "gdb",
-          "request": "launch",
-          "program": "${workspaceFolder}/target/debug/advent1",
-          "args": [],
-          "stopAtEntry": false,
-          "cwd": "${workspaceFolder}",
-          "environment": [],
-          "externalConsole": false,
-          "MIMode": "gdb",
-          "gdbpath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
-          "miDebuggerPath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
-          "dap-compilation": "cargo build",
-          "dap-compilation-dir": "${workspaceFolder}",
-          "sourceLanguages": ["rust"]
-        },
-        {
-          "name": "Debug LLDB advent1.rs",
-          "type": "lldb-vscode",
-          "request": "launch",
-          "program": "${workspaceFolder}/target/debug/advent1",
-          "args": [],
-          "stopAtEntry": true,
-          "cwd": "${workspaceFolder}",
-          "environment": [],
-          "externalConsole": false,
-          "MIMode": "lldb",
-          "miDebuggerPath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-lldb",
-          "dap-compilation": "cargo build",
-          "dap-compilation-dir": "${workspaceFolder}",
-          "sourceLanguages": ["rust"]
-        }
-    ]
+  "configurations": [
+    {
+      "docs": "https://github.com/WebFreak001/code-debug/blob/26d7d9fe64f222618c3302c323a4da2c426b71a4/src/gdb.ts#L7",
+      "cwd": "${workspaceFolder}",
+      "target": "${workspaceFolder}/target/debug/main",
+      "gdbpath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
+      "arguments": [
+        "--advent1"
+      ],
+      "name": "Debug main --advent1",
+      "type": "gdb",
+      "request": "launch"
+    }
+  ]
 }

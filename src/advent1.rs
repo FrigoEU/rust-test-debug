@@ -27,12 +27,8 @@ pub fn main() {
 
             totals.sort();
             match totals[..] {
-                [.., third, second, first] => {
-                    println!("Total: {:?}", first + second + third);
-                }
-                _ => {
-                    panic!("Less than 3 elves")
-                }
+                [.., third, second, first] => println!("Total: {:?}", first + second + third),
+                _ => panic!("Less than 3 elves"),
             }
         }
     }
