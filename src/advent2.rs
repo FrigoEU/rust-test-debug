@@ -9,26 +9,38 @@ pub fn main() {
             .split_once(' ')
             .expect(&format!("Failed to read line {}", line));
         let opponent_move = parse_opponent_move(split.0);
-        let own_move = parse_own_move(split.1);
-        let own_move_score = score_move(&own_move);
-        let result = calculate_result(opponent_move, own_move);
-        let result_score = score_result(&result);
+        let expected_result = parse_expected_result(split.1);
+        let own_move = calculate_own_move(opponent_move, expected_result);
+        let own_move_score = score_move(own_move);
+        let result_score = score_result(expected_result);
         return acc + own_move_score + result_score;
     });
 
     println!("Total score: {:?}", score);
 }
 
+#[derive(Clone, Copy)]
 enum GameMove {
     Rock,
     Paper,
     Scissors,
 }
 
+#[derive(PartialEq, Clone, Copy)]
 enum GameResult {
     Loss,
     Draw,
     Win,
+}
+
+fn calculate_own_move(opponent_move: GameMove, expected_result: GameResult) -> GameMove {
+    if calculate_result(opponent_move, GameMove::Rock) == expected_result {
+        return GameMove::Rock;
+    } else if calculate_result(opponent_move, GameMove::Paper) == expected_result {
+        return GameMove::Paper;
+    } else {
+        return GameMove::Scissors;
+    }
 }
 
 fn calculate_result(opponent_move: GameMove, own_move: GameMove) -> GameResult {
@@ -54,16 +66,16 @@ fn parse_opponent_move(s: &str) -> GameMove {
     }
 }
 
-fn parse_own_move(s: &str) -> GameMove {
+fn parse_expected_result(s: &str) -> GameResult {
     match s.as_ref() {
-        "X" => GameMove::Rock,
-        "Y" => GameMove::Paper,
-        "Z" => GameMove::Scissors,
-        _ => panic!("Failed to parse own move {:?}", s),
+        "X" => GameResult::Loss,
+        "Y" => GameResult::Draw,
+        "Z" => GameResult::Win,
+        _ => panic!("Failed to parse expected result {:?}", s),
     }
 }
 
-fn score_move(m: &GameMove) -> i32 {
+fn score_move(m: GameMove) -> i32 {
     match m {
         GameMove::Rock => 1,
         GameMove::Paper => 2,
@@ -71,7 +83,7 @@ fn score_move(m: &GameMove) -> i32 {
     }
 }
 
-fn score_result(m: &GameResult) -> i32 {
+fn score_result(m: GameResult) -> i32 {
     match m {
         GameResult::Loss => 0,
         GameResult::Draw => 3,

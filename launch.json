@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "docs": "https://github.com/WebFreak001/code-debug/blob/26d7d9fe64f222618c3302c323a4da2c426b71a4/src/gdb.ts#L7",
+      "//simon_docs": "https://github.com/WebFreak001/code-debug/blob/26d7d9fe64f222618c3302c323a4da2c426b71a4/src/gdb.ts#L7",
       "cwd": "${workspaceFolder}",
       "target": "${workspaceFolder}/target/debug/main",
       "gdbpath": "/nix/store/yxahn76zdfg07rims69zpwajch937kxh-rustc-1.64.0/bin/rust-gdb",
